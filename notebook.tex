@@ -1,0 +1,1051 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Final Report4}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{cseceisye-524-introduction-to-optimization-summer-2019}{%
+\subsubsection{CS/ECE/ISyE 524 --- Introduction to Optimization ---
+Summer
+2019}\label{cseceisye-524-introduction-to-optimization-summer-2019}}
+
+\hypertarget{implement-optimization-in-smartphone-supply-chain-problem}{%
+\section{Implement Optimization in Smartphone Supply Chain
+Problem}\label{implement-optimization-in-smartphone-supply-chain-problem}}
+
+\hypertarget{zihao-chen-zchen565wisc.edu-jinxin-tao-jtao34wisc.edu-ruijia-wang-rwang428wisc.edu}{%
+\paragraph{Zihao Chen (zchen565@wisc.edu), Jinxin Tao (jtao34@wisc.edu),
+Ruijia Wang
+(rwang428@wisc.edu)}\label{zihao-chen-zchen565wisc.edu-jinxin-tao-jtao34wisc.edu-ruijia-wang-rwang428wisc.edu}}
+
+\hypertarget{table-of-contents}{%
+\subsubsection{Table of Contents}\label{table-of-contents}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Section \ref{1-introduction}
+\item
+  Section \ref{2-mathematical-model}
+\item
+  Section \ref{3-solution}
+\item
+  Section \ref{4-results-and-discussion}
+\item
+  Section \ref{5-conclusion}
+\end{enumerate}
+
+    \hypertarget{introduction}{%
+\subsection{1. Introduction}\label{introduction}}
+
+This project aims to implement optimization in supply chain decision
+making on suppliers selection and plant location selection. A mobile
+phone has an extremely complex supply chain that is basically made up of
+three areas: raw material extraction, component manufacture, assembly.
+In this project, we focus on the last two manufacture processes, model
+the decision making problems as quadratic programs and optimize the
+strategies in our settings.
+
+Each smartphone on the planet is made up of a large and complex set of
+components, including processors, storage, sensors, communication chips,
+boards and much more. Given this complexity, smartphone manufacturers
+look to third-party vendors -- hundreds of them -- to supply the
+individual hardware components, and each of these suppliers may have its
+own sub-suppliers. The result is an immensely interdependent supply
+chain. And that's before we get into the firmware and the upper layers
+of the smartphone stack.
+
+For the component manufacture modeling part, a functional smartphone is
+modeled to be made up of a certain number of components. Each component
+has their own manufacture area where a specific number of suppliers
+produce the individual hardware components. Considering the fact that
+finding the right suppliers and resources diversely can actually lower
+costs and greatly reduce the risk of a single supplier going out of
+stock, we try to look for the balance of the number of orders among
+different suppliers. After we have the required components ready, we
+have to locate a place to assemble smartphone accessories in a
+restricted area to achieve minimum total cost with trasportation cost
+and assembly cost combined. A special area with government allowance is
+also considered and gives lower assembly cost.
+
+The purchasing prices for smartphone components are given on the
+internet. The number of vendors, number of demand and locations are
+reasonably assumed. After the number of orders from each supplier on a
+specific component are determined, those goods are considered to be
+placed at one predetermined spot no matter the number of suppliers
+chosen to simplify the problem.
+
+In the sections below, detailed math models, solution code, discussion
+of the results and conclusion of the project will be displayed.
+
+\begin{figure}
+\centering
+\includegraphics{http://pages.cs.wisc.edu/~zihaoc/map.jpg}
+\caption{fixit flowchart}
+\end{figure}
+
+    \hypertarget{mathematical-model}{%
+\subsection{2. Mathematical model}\label{mathematical-model}}
+
+\textbf{Decision Making on Suppliers Selection}
+
+\textbf{Type of the model}: The first part of the problem is a quadratic
+program.
+
+\textbf{Variables}: \(x_{ij}, \forall i\in 1,2...,7, j\in S_i\) is the
+number of orders for each component \(i\) from supplier \(j\).
+
+\textbf{Parameters}:
+
+\(N\) is the required number of each component and the numbers should be
+equal.
+
+\(\gamma_i\) is the defective rate for component \(i\).
+
+\(\lambda\) is the penalty parameter of the variance.
+
+\(p_{ij}\) is the purchasing price for component \(i\) from supplier
+\(j\).
+
+\(Card(S_i)\) is the number of suppliers for component \(i\).
+
+\textbf{Constraints}: The total number of orders for each component
+(\(\sum_{j\in S_i} x_{ij}\), where \(i= 1,2,...7\) is the component
+index) should be greater than the sum of the assigned demand (\(N\)) and
+the defective parts to meet the demand. The number of defects are
+determined by the defective rate \(\lambda_i\) with respect to each
+component.
+\[\sum_{j\in S_i} x_{ij}\geq N(1+\gamma_i), \forall i= 1,2...7, j\in S_i\]
+Each order cannot be negative.
+\[x_{ij}\geq 0, \forall i= 1,2...7, j\in S_i\]
+
+\textbf{Objective}: We want to minimize the sum of the purchase price
+from each supplier for every smartphone component with the tradeoff of
+the variance of the number of orders. Thus, there may exist the best
+supplier, however, to avoid the monopolization that may become a
+potential hazard in the future, we also want to balance the number of
+orders among available corporators.
+\[\mathop{\min}\limits_{x_{ij}} \sum_{j\in S_i} x_{ij}p_{ij}+\lambda \sum_{i=1}^7 \sum_{j\in S_i}(x_{ij}-N(1+\gamma_i)/|S_i|)^2\]
+where, \(|S_i|\) is \(Card(S_i)\), the number of suppliers for component
+\(i\).
+
+\textbf{Full math model}: \[  \begin{aligned}
+  & \underset{x_{ij}}{\text{min}}
+  & & \sum_{j\in S_i} x_{ij}p_{ij}+\lambda \sum_{i=1}^7 \sum_{j\in S_i}(x_{ij}-N(1+\gamma_i)/|S_i|)^2 \\
+  & \text{subject to}
+  & & \sum_{j\in S_i} x_{ij}\geq N(1+\gamma_i), \forall i= 1,2...7, j\in S_i \\
+  &&& x_{ij} \geq 0, \forall i= 1,2...7, j\in S_i \\
+  \end{aligned}\]
+
+\textbf{Assembly Plant Location Selection}
+
+\textbf{Type of the model}: This part of the problem is a quadratic
+program.
+
+\textbf{Variables}: \((x, y)\)， stands for the location of the assembly
+plant.
+
+\textbf{Parameters}:
+
+\((x_i, y_i), i= 1,2,..,7\) is the location of the component \(i\).
+
+\((x_a, y_a)\) is the coordinate of the center of the area where
+government offers allowance.
+
+\(C_i, i= 1,2,..,7\) is the specific transportation cost for \(i\)
+component, respectively.
+
+\(p_{in}\) is the assembling price inside the allowance area.
+
+\(p_{out}\) is the assembling price created by locating the factory
+outside the allowance area.
+
+\(d\) is the side length of square allowance area.
+
+\(R\) is the radius of assigned area where the plant should be located.
+
+\(N\) is the total number of demand.
+
+\begin{figure}
+\centering
+\includegraphics{http://pages.cs.wisc.edu/~zihaoc/budget.jpg}
+\caption{fixit flowchart}
+\end{figure}
+
+\textbf{Constraints}: The plant either locates in the square area
+(\(A_1\)) where the government offers allowance or locates outside the
+square but in the circle due to restriction (\(A_2\)). However, the
+latter area is not convex, so we divide the area into four convex parts.
+The total five parts can be formulated as follows. If locates in
+\(A_1\), \[|x-x_a|\leq d/2, |y-y_a|\leq d/2\] If locates in \(A_2\), The
+first part (\(A_{21}\)):
+\[x\geq x_a-d/2, y\geq y_a+d/2, (x-x_a)^2+(y-y_a)^2\leq R^2\] The second
+part (\(A_{22}\)):
+\[x\geq x_a+d/2, y\leq y_a+d/2, (x-x_a)^2+(y-y_a)^2\leq R^2\] The third
+part (\(A_{23}\)):
+\[x\leq x_a+d/2, y\leq y_a-d/2, (x-x_a)^2+(y-y_a)^2\leq R^2\] The fourth
+part (\(A_{24}\)):
+\[x\leq x_a-d/2, y\geq y_a-d/2, (x-x_a)^2+(y-y_a)^2\leq R^2\]
+
+\textbf{Objective}: We want to minimize the total cost by locating
+assembly plant wisely. The transportation cost which is proportion to
+the square of the distance, will be probably higher if we locate our
+plant in the government allowance area but we have to pay more on
+assembling if we locate elsewhere. We will find the best location on
+each part and compare the total cost. If the plant is located in
+allowance area, the objective is:
+\[\mathop{\min}\limits_{(x,y)\in A_1} \sum_{i=1}^7 C_i  [ \,(x-x_i)^2+(y-y_i)^2]\,+Np_{in}\]
+If the plant is located elsewhere, the objective is:
+\[\mathop{\min}\limits_{(x,y)\in A_{2k}} \sum_{i=1}^7 C_i  [ \,(x-x_i)^2+(y-y_i)^2]\,+Np_{out}, \forall k= 1,2,3,4\]
+where we set \(p_{out}\geq p_{in}\).
+
+\textbf{Full math model}: Set \((x_a, y_a)=(0,0)\), for senario 1,
+\[  \begin{aligned}
+  & \underset{(x,y)\in A_1}{\text{min}}
+  & & \sum_{i=1}^7 C_i  [ \,(x-x_i)^2+(y-y_i)^2]\,+Np_{in} \\
+  & \text{subject to}
+  & & x\leq d/2, \\
+  &&& x\geq -d/2, \\
+  &&& y\leq d/2, \\
+  &&& y\geq -d/2, \\
+  \end{aligned}\] for senario 2, \[  \begin{aligned}
+  & \underset{(x,y)\in A_{21}}{\text{min}}
+  & & \sum_{i=1}^7 C_i  [ \,(x-x_i)^2+(y-y_i)^2]\,+Np_{out} \\
+  & \text{subject to}
+  & & x\geq -d/2, \\
+  &&& y\geq d/2, \\
+  &&& x^2+y^2\leq R^2 \\
+  \end{aligned}\] for senario 3, \[  \begin{aligned}
+  & \underset{(x,y)\in A_{22}}{\text{min}}
+  & & \sum_{i=1}^7 C_i  [ \,(x-x_i)^2+(y-y_i)^2]\,+Np_{out} \\
+  & \text{subject to}
+  & & x\geq d/2, \\
+  &&& y\leq d/2, \\
+  &&& x^2+y^2\leq R^2 \\
+  \end{aligned}\] for senario 4, \[  \begin{aligned}
+  & \underset{(x,y)\in A_{23}}{\text{min}}
+  & & \sum_{i=1}^7 C_i  [ \,(x-x_i)^2+(y-y_i)^2]\,+Np_{out} \\
+  & \text{subject to}
+  & & x\leq d/2, \\
+  &&& y\leq -d/2, \\
+  &&& x^2+y^2\leq R^2 \\
+  \end{aligned}\] for senario 5, \[  \begin{aligned}
+  & \underset{(x,y)\in A_{24}}{\text{min}}
+  & & \sum_{i=1}^7 C_i  [ \,(x-x_i)^2+(y-y_i)^2]\,+Np_{out} \\
+  & \text{subject to}
+  & & x\leq -d/2, \\
+  &&& y\geq -d/2, \\
+  &&& x^2+y^2\leq R^2 \\
+  \end{aligned}\]
+
+    \hypertarget{solution}{%
+\subsection{3. Solution}\label{solution}}
+
+The solution is separated to two parts. 1.solve the suppliers problem on
+purchasing each component to minimize the total price. 2.find the best
+location to minimize the transportation and assembly cost.
+
+    For the suppliers selection problem, since the number of suppliers for
+each component is different, we cannot use two dimension array. Instead,
+we use screen\([ \, ] \,\),
+camera\([ \, ] \,\),soc\([ \, ] \,\),ramrom\([ \, ] \,\),
+mainboard\([ \, ] \,\),sensor\([ \, ] \,\),battery\([ \, ] \,\) to
+represent the price proposed from each component suppliers. We will need
+enough amount of each component and assembly them to meet the demand for
+finished product which is set to 1000000. The defective rate for each
+component is considered same regardless the suppliers. The penalty
+parameters for not balancing the purchaing amount among the available
+suppliers are different for different component.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k}{using} \PY{n}{JuMP}\PY{p}{,} \PY{n}{Gurobi}
+         
+         \PY{n}{m} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{solver}\PY{o}{=}\PY{n}{GurobiSolver}\PY{p}{(}\PY{n}{OutputFlag}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{c}{\PYZsh{}1000000 total}
+         \PY{n}{total} \PY{o}{=} \PY{l+m+mi}{1000000} \PY{c}{\PYZsh{}production phones }
+         
+         \PY{c}{\PYZsh{}7 components}
+         \PY{n}{component} \PY{o}{=}\PY{p}{[}\PY{o}{:}\PY{n}{screen}\PY{p}{,}\PY{o}{:}\PY{n}{camera}\PY{p}{,}\PY{o}{:}\PY{n}{soc}\PY{p}{,}\PY{o}{:}\PY{n}{ramrom}\PY{p}{,}\PY{o}{:}\PY{n}{mainboard}\PY{p}{,}\PY{o}{:}\PY{n}{sensor}\PY{p}{,}\PY{o}{:}\PY{n}{battery}\PY{p}{]}
+         
+         \PY{c}{\PYZsh{}the price proposed by every possible supplier for each componets}
+         \PY{c}{\PYZsh{}since the numbers of suppliers are different, we cannot use a matrix directly }
+         \PY{n}{screen} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{80}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{85}\PY{p}{]}
+         \PY{n}{camera} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{]}
+         \PY{n}{soc} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{]}
+         \PY{n}{ramrom} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{43}\PY{p}{,}\PY{l+m+mi}{45}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{]}
+         \PY{n}{mainboard} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mf}{10.5}\PY{p}{]}
+         \PY{n}{sensor} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mf}{6.7}\PY{p}{,}\PY{l+m+mf}{6.9}\PY{p}{,}\PY{l+m+mf}{7.7}\PY{p}{,}\PY{l+m+mf}{7.9}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}
+         \PY{n}{battery} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mf}{4.5}\PY{p}{,}\PY{l+m+mf}{4.7}\PY{p}{,}\PY{l+m+mf}{5.9}\PY{p}{,}\PY{l+m+mf}{5.5}\PY{p}{]}
+         
+         \PY{c}{\PYZsh{}number of suppliers for each component}
+         \PY{n}{supplier} \PY{o}{=} \PY{k+kt}{Dict}\PY{p}{(}\PY{n}{zip}\PY{p}{(}\PY{n}{component}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}defective rate}
+         \PY{c}{\PYZsh{}need extra production to grantee the total }
+         \PY{n}{defective} \PY{o}{=} \PY{k+kt}{Dict}\PY{p}{(}\PY{n}{zip}\PY{p}{(}\PY{n}{component}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{l+m+mf}{0.05}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.05}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}the real number we use in the following calculation}
+         \PY{n}{totaleach} \PY{o}{=} \PY{k+kt}{Dict}\PY{p}{(}\PY{n}{zip}\PY{p}{(}\PY{n}{component}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{n}{component}
+             \PY{n}{totaleach}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{total}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{defective}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+         \PY{k}{end}
+         
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{totaleach}\PY{p}{)}
+         \PY{n}{expectation} \PY{o}{=} \PY{k+kt}{Dict}\PY{p}{(}\PY{n}{zip}\PY{p}{(}\PY{n}{component}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{n}{component}
+             \PY{n}{expectation}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{totaleach}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{n}{supplier}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+         \PY{k}{end}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{expectation}\PY{p}{)}
+         
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{screen\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{\PYZgt{}=} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{camera\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{\PYZgt{}=} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{soc\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{\PYZgt{}=} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{ramrom\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{\PYZgt{}=} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{mainboard\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{\PYZgt{}=} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{sensor\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{6}\PY{p}{]} \PY{o}{\PYZgt{}=} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{battery\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{\PYZgt{}=} \PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}penalty for depending on several companies}
+         \PY{n}{lambda} \PY{o}{=} \PY{k+kt}{Dict}\PY{p}{(}\PY{n}{zip}\PY{p}{(}\PY{n}{component}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{0.00005}\PY{p}{,} \PY{l+m+mf}{0.00002}\PY{p}{,}\PY{l+m+mf}{0.00006}\PY{p}{,}\PY{l+m+mf}{0.00004}\PY{p}{,}\PY{l+m+mf}{0.00001}\PY{p}{,}\PY{l+m+mf}{0.00001}\PY{p}{,}\PY{l+m+mf}{0.000005}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+         
+         \PY{c}{\PYZsh{}fulfills the number of products each}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{n}{screen\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{\PYZgt{}=} \PY{n}{totaleach}\PY{p}{[}\PY{o}{:}\PY{n}{screen}\PY{p}{]}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{n}{camera\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{\PYZgt{}=} \PY{n}{totaleach}\PY{p}{[}\PY{o}{:}\PY{n}{camera}\PY{p}{]}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{n}{soc\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{\PYZgt{}=} \PY{n}{totaleach}\PY{p}{[}\PY{o}{:}\PY{n}{soc}\PY{p}{]}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{n}{ramrom\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{\PYZgt{}=} \PY{n}{totaleach}\PY{p}{[}\PY{o}{:}\PY{n}{ramrom}\PY{p}{]}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{n}{mainboard\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{\PYZgt{}=} \PY{n}{totaleach}\PY{p}{[}\PY{o}{:}\PY{n}{mainboard}\PY{p}{]}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{n}{sensor\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{6}\PY{p}{)}\PY{o}{\PYZgt{}=} \PY{n}{totaleach}\PY{p}{[}\PY{o}{:}\PY{n}{sensor}\PY{p}{]}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{n}{battery\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{\PYZgt{}=} \PY{n}{totaleach}\PY{p}{[}\PY{o}{:}\PY{n}{battery}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}screen\PYZus{}x[i]*screen[i] + lambda[:screen]*(sum((screen[i]\PYZhy{}expectation[:screen])\PYZca{}2) for i = 1:4}
+         \PY{c}{\PYZsh{}this is the cost of one component}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{screen}\PY{p}{]}\PY{p}{)}
+         \PY{n+nd}{@objective}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{Min}\PY{p}{,} 
+              \PY{n}{sum}\PY{p}{(}\PY{n}{screen\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{screen}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{screen}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{screen\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{screen}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{o}{+}\PY{n}{sum}\PY{p}{(}\PY{n}{camera\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{camera}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{camera}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{camera\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{camera}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{o}{+}\PY{n}{sum}\PY{p}{(}\PY{n}{soc\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{soc}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{soc}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{soc\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{soc}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{3}\PY{p}{)}
+             \PY{o}{+}\PY{n}{sum}\PY{p}{(}\PY{n}{ramrom\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{ramrom}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{ramrom}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{ramrom\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{ramrom}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{o}{+}\PY{n}{sum}\PY{p}{(}\PY{n}{mainboard\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{mainboard}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{mainboard}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{mainboard\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{mainboard}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{)}
+             \PY{o}{+}\PY{n}{sum}\PY{p}{(}\PY{n}{sensor\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{sensor}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{sensor}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{sensor\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{sensor}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{6}\PY{p}{)}
+             \PY{o}{+}\PY{n}{sum}\PY{p}{(}\PY{n}{battery\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{battery}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{battery}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{battery\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{battery}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{)}
+          \PY{p}{)}
+         \PY{n}{solve}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{screen\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{camera\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{soc\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{ramrom\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{mainboard\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{sensor\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{battery\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getobjectivevalue}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Dict(:camera=>1200000,:screen=>1400000,:battery=>1100000,:sensor=>1050000,:ramrom=>1100000,:mainboard=>1100000,:soc=>1050000)
+Dict(:camera=>300000,:screen=>350000,:battery=>220000,:sensor=>175000,:ramrom=>275000,:mainboard=>220000,:soc=>350000)
+5.0e-5
+Academic license - for non-commercial use only
+[362500.0, 462500.0, 262500.0, 312500.0]
+[337500.0, 387500.0, 262500.0, 212500.0]
+[3.58333e5, 3.16667e5, 375000.0]
+[284375.0, 246875.0, 221875.0, 346875.0]
+[215000.0, 265000.0, 315000.0, 115000.0, 190000.0]
+[1.93333e5, 2.08333e5, 1.98333e5, 1.58333e5, 1.48333e5, 1.43333e5]
+[232000.0, 282000.0, 262000.0, 142000.0, 182000.0]
+2.3892649583333337e8
+
+    \end{Verbatim}
+
+    For the assembly plant location selection problem, we need to set the
+location for each component because spare parts for each component are
+considered to be placed at one spot no matter the number of suppliers
+chosen to simplify the problem. We divide the target area into 5 parts
+to form 5 convex optimization problems and select the optimal location
+by comparison.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{k}{using} \PY{n}{JuMP}\PY{p}{,} \PY{n}{Gurobi}
+         
+         \PY{c}{\PYZsh{}the location of the 7 components}
+         \PY{n}{x\PYZus{}pos} \PY{o}{=} \PY{k+kt}{Dict}\PY{p}{(}\PY{n}{zip}\PY{p}{(}\PY{n}{component}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{180}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{400}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{,}\PY{l+m+mi}{230}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{280}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y\PYZus{}pos} \PY{o}{=} \PY{k+kt}{Dict}\PY{p}{(}\PY{n}{zip}\PY{p}{(}\PY{n}{component}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{300}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{260}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{,}\PY{l+m+mi}{430}\PY{p}{,}\PY{l+m+mi}{380}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{200}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}the parameter for delivering each component}
+         \PY{n}{p} \PY{o}{=} \PY{k+kt}{Dict}\PY{p}{(}\PY{n}{zip}\PY{p}{(}\PY{n}{component}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.000002}\PY{p}{,}\PY{l+m+mf}{0.000001}\PY{p}{,}\PY{l+m+mf}{0.000001}\PY{p}{,}\PY{l+m+mf}{0.000001}\PY{p}{,}\PY{l+m+mf}{0.0000015}\PY{p}{,}\PY{l+m+mf}{0.000001}\PY{p}{,}\PY{l+m+mf}{0.00001}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}to simplify the question, we choose the allowance center at (0,0)}
+         \PY{n}{allowance\PYZus{}x} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{allowance\PYZus{}y} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{n}{l} \PY{o}{=} \PY{l+m+mi}{20} \PY{c}{\PYZsh{}l = d/2 in the introduction, to simplify the calculation}
+         \PY{n}{r} \PY{o}{=} \PY{l+m+mi}{100} \PY{c}{\PYZsh{}radius of the target area}
+         
+         \PY{n}{price\PYZus{}in} \PY{o}{=} \PY{l+m+mi}{2} \PY{c}{\PYZsh{}the assembling price in the allowance area}
+         \PY{n}{price\PYZus{}out} \PY{o}{=} \PY{l+m+mi}{3} \PY{c}{\PYZsh{}the assembling price out side the square(allowance area), but inside the circle}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} 3
+\end{Verbatim}
+            
+    The following part is to the best location in allowance area. The area
+is convex, so there will be an optimal.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{m1} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{solver} \PY{o}{=} \PY{n}{GurobiSolver}\PY{p}{(}\PY{n}{OutputFlag} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m1}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m1}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m1}\PY{p}{,} \PY{n}{y}\PY{o}{\PYZlt{}=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m1}\PY{p}{,} \PY{n}{y}\PY{o}{\PYZgt{}=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m1}\PY{p}{,} \PY{n}{x}\PY{o}{\PYZlt{}=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m1}\PY{p}{,} \PY{n}{x}\PY{o}{\PYZgt{}=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@objective}\PY{p}{(}\PY{n}{m1}\PY{p}{,} \PY{n}{Min}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{x\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{p}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{totaleach}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{n}{component}\PY{p}{)}
+             \PY{o}{+}\PY{n}{total}\PY{o}{*}\PY{n}{price\PYZus{}in} \PY{p}{)}
+         
+         \PY{n}{solve}\PY{p}{(}\PY{n}{m1}\PY{p}{)}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{getobjectivevalue}\PY{p}{(}\PY{n}{m1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Academic license - for non-commercial use only
+6.789345176322418e6
+-20.0
+16.14609571788413
+
+    \end{Verbatim}
+
+    The next four code cells calculated the four convex part. Similarly,
+finding the best location for assembling.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{m2} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{solver} \PY{o}{=} \PY{n}{GurobiSolver}\PY{p}{(}\PY{n}{OutputFlag} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m2}\PY{p}{,} \PY{n}{x2}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m2}\PY{p}{,} \PY{n}{y2}\PY{p}{)}
+         
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m2}\PY{p}{,} \PY{n}{x2}\PY{o}{\PYZgt{}=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m2}\PY{p}{,} \PY{n}{y2}\PY{o}{\PYZgt{}=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m2}\PY{p}{,} \PY{p}{(}\PY{n}{x2}\PY{o}{\PYZhy{}}\PY{n}{allowance\PYZus{}x}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y2}\PY{o}{\PYZhy{}}\PY{n}{allowance\PYZus{}y}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}  \PY{o}{\PYZlt{}=} \PY{n}{r}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n+nd}{@objective}\PY{p}{(}\PY{n}{m2}\PY{p}{,} \PY{n}{Min}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{x2}\PY{o}{\PYZhy{}}\PY{n}{x\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y2}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{p}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{totaleach}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{n}{component}\PY{p}{)} \PY{o}{+} \PY{n}{price\PYZus{}out}\PY{o}{*}\PY{n}{total}\PY{p}{)}
+         
+         \PY{n}{solve}\PY{p}{(}\PY{n}{m2}\PY{p}{)}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{getobjectivevalue}\PY{p}{(}\PY{n}{m2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Academic license - for non-commercial use only
+7.789640000000067e6
+-20.00000000001737
+20.000000000021394
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{m3} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{solver} \PY{o}{=} \PY{n}{GurobiSolver}\PY{p}{(}\PY{n}{OutputFlag} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m3}\PY{p}{,} \PY{n}{x3}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m3}\PY{p}{,} \PY{n}{y3}\PY{p}{)}
+         
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m3}\PY{p}{,} \PY{n}{x3}\PY{o}{\PYZgt{}=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m3}\PY{p}{,} \PY{n}{y3}\PY{o}{\PYZlt{}=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m3}\PY{p}{,} \PY{p}{(}\PY{n}{x3}\PY{o}{\PYZhy{}}\PY{n}{allowance\PYZus{}x}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y3}\PY{o}{\PYZhy{}}\PY{n}{allowance\PYZus{}y}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}  \PY{o}{\PYZlt{}=} \PY{n}{r}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n+nd}{@objective}\PY{p}{(}\PY{n}{m3}\PY{p}{,} \PY{n}{Min}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{x3}\PY{o}{\PYZhy{}}\PY{n}{x\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y3}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{p}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{totaleach}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{n}{component}\PY{p}{)} \PY{o}{+} \PY{n}{price\PYZus{}out}\PY{o}{*}\PY{n}{total}\PY{p}{)}
+         
+         \PY{n}{solve}\PY{p}{(}\PY{n}{m3}\PY{p}{)}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{getobjectivevalue}\PY{p}{(}\PY{n}{m3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Academic license - for non-commercial use only
+8.183625176323161e6
+20.000000000061128
+16.146156336791197
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{m4} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{solver} \PY{o}{=} \PY{n}{GurobiSolver}\PY{p}{(}\PY{n}{OutputFlag} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m4}\PY{p}{,} \PY{n}{x4}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m4}\PY{p}{,} \PY{n}{y4}\PY{p}{)}
+         
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m4}\PY{p}{,} \PY{n}{x4}\PY{o}{\PYZlt{}=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m4}\PY{p}{,} \PY{n}{y4}\PY{o}{\PYZlt{}=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m4}\PY{p}{,} \PY{p}{(}\PY{n}{x4}\PY{o}{\PYZhy{}}\PY{n}{allowance\PYZus{}x}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y4}\PY{o}{\PYZhy{}}\PY{n}{allowance\PYZus{}y}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}  \PY{o}{\PYZlt{}=} \PY{n}{r}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n+nd}{@objective}\PY{p}{(}\PY{n}{m4}\PY{p}{,} \PY{n}{Min}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{x4}\PY{o}{\PYZhy{}}\PY{n}{x\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y4}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{p}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{totaleach}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{n}{component}\PY{p}{)} \PY{o}{+} \PY{n}{price\PYZus{}out}\PY{o}{*}\PY{n}{total}\PY{p}{)}
+         
+         \PY{n}{solve}\PY{p}{(}\PY{n}{m4}\PY{p}{)}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{getobjectivevalue}\PY{p}{(}\PY{n}{m4}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x4}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Academic license - for non-commercial use only
+7.229255567372795e6
+-97.97953122679836
+-20.000015254087458
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{ansi-yellow-intense}{\textbf{WARNING: }}\textcolor{ansi-yellow}{Not solved to optimality, status: Suboptimal}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{m5} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{solver} \PY{o}{=} \PY{n}{GurobiSolver}\PY{p}{(}\PY{n}{OutputFlag} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m5}\PY{p}{,} \PY{n}{x5}\PY{p}{)}
+         \PY{n+nd}{@variable}\PY{p}{(}\PY{n}{m5}\PY{p}{,} \PY{n}{y5}\PY{p}{)}
+         
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m5}\PY{p}{,} \PY{n}{x5}\PY{o}{\PYZlt{}=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m5}\PY{p}{,} \PY{n}{y5}\PY{o}{\PYZgt{}=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n+nd}{@constraint}\PY{p}{(}\PY{n}{m5}\PY{p}{,} \PY{p}{(}\PY{n}{x5}\PY{o}{\PYZhy{}}\PY{n}{allowance\PYZus{}x}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y5}\PY{o}{\PYZhy{}}\PY{n}{allowance\PYZus{}y}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}  \PY{o}{\PYZlt{}=} \PY{n}{r}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n+nd}{@objective}\PY{p}{(}\PY{n}{m5}\PY{p}{,} \PY{n}{Min}\PY{p}{,} \PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{x5}\PY{o}{\PYZhy{}}\PY{n}{x\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y5}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{p}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{totaleach}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{n}{component}\PY{p}{)} \PY{o}{+} \PY{n}{price\PYZus{}out}\PY{o}{*}\PY{n}{total}\PY{p}{)}
+         
+         \PY{n}{solve}\PY{p}{(}\PY{n}{m5}\PY{p}{)}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{getobjectivevalue}\PY{p}{(}\PY{n}{m5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Academic license - for non-commercial use only
+7.194437988844871e6
+-99.78922046655849
+6.489337316425751
+
+    \end{Verbatim}
+
+    Combining these 5 parts, we can get the best location for minmum cost.
+The final result is in the allowance area --6.789e6
+
+    \hypertarget{results-and-discussion}{%
+\subsection{4. Results and discussion}\label{results-and-discussion}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{using} \PY{n}{PyPlot}
+         \PY{n}{lambda} \PY{o}{=} \PY{k+kt}{Dict}\PY{p}{(}\PY{n}{zip}\PY{p}{(}\PY{n}{component}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{0.00005}\PY{p}{,} \PY{l+m+mf}{0.00002}\PY{p}{,}\PY{l+m+mf}{0.00006}\PY{p}{,}\PY{l+m+mf}{0.00004}\PY{p}{,}\PY{l+m+mf}{0.00001}\PY{p}{,}\PY{l+m+mf}{0.00001}\PY{p}{,}\PY{l+m+mf}{0.000005}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+         
+         \PY{n}{cost\PYZus{}1} \PY{o}{=} \PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+         \PY{n}{cost\PYZus{}2} \PY{o}{=} \PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+         
+         \PY{n}{cost\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{screen\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{screen}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{cost\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{screen}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{screen\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{screen}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+         
+         \PY{n}{cost\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{camera\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{camera}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{cost\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{camera}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{camera\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{camera}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+         
+         \PY{n}{cost\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{soc\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{soc}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{cost\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{soc}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{soc\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{soc}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{n}{cost\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{ramrom\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{ramrom}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{cost\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{ramrom}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{ramrom\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{ramrom}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+         
+         \PY{n}{cost\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{mainboard\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{mainboard}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{cost\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{mainboard}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{mainboard\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{mainboard}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{cost\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{sensor\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{sensor}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{cost\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{sensor}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{sensor\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{sensor}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{6}\PY{p}{)}
+         
+         \PY{n}{cost\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{battery\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{battery}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{cost\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]} \PY{o}{=} \PY{n}{sum}\PY{p}{(}\PY{n}{lambda}\PY{p}{[}\PY{o}{:}\PY{n}{battery}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{battery\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{expectation}\PY{p}{[}\PY{o}{:}\PY{n}{battery}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{screen\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{xlabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{P}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{c}\PY{l+s}{h}\PY{l+s}{a}\PY{l+s}{s}\PY{l+s}{i}\PY{l+s}{n}\PY{l+s}{g}\PY{l+s}{ }\PY{l+s}{f}\PY{l+s}{u}\PY{l+s}{n}\PY{l+s}{d}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{n}{ylabel}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{M}\PY{l+s}{o}\PY{l+s}{n}\PY{l+s}{o}\PY{l+s}{p}\PY{l+s}{o}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{z}\PY{l+s}{a}\PY{l+s}{t}\PY{l+s}{i}\PY{l+s}{o}\PY{l+s}{n}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{e}\PY{l+s}{n}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{t}\PY{l+s}{y}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{scatter}\PY{p}{(} \PY{n}{cost\PYZus{}1}\PY{p}{,} \PY{n}{cost\PYZus{}2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{u}\PY{l+s}{e}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{screen\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{camera\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{soc\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{ramrom\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{mainboard\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{sensor\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{battery\PYZus{}x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getobjectivevalue}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[362500.0, 462500.0, 262500.0, 312500.0]
+[362500.0, 462500.0, 262500.0, 312500.0]
+[337500.0, 387500.0, 262500.0, 212500.0]
+[3.58333e5, 3.16667e5, 375000.0]
+[284375.0, 246875.0, 221875.0, 346875.0]
+[215000.0, 265000.0, 315000.0, 115000.0, 190000.0]
+[1.93333e5, 2.08333e5, 1.98333e5, 1.58333e5, 1.48333e5, 1.43333e5]
+[232000.0, 282000.0, 262000.0, 142000.0, 182000.0]
+2.3892649583333337e8
+
+    \end{Verbatim}
+
+    Purchasing fund represents the total number of cost for each component
+while the monopolization penalty is the variance for each component
+multiplied by a tradeoff value \(\lambda\). The above plot shows the
+optimal result for each component with respect to purchasing fund and
+monopolization penalty. The values shown above are the number of
+components that should be purchased from each supplier.
+
+Since our penalty parameter is a vector, it is not convenient to display
+a sensitivity analysis result, however when we built the model, we found
+that only if we increase the magnitude of the penalty parameter
+\(\lambda\), the number of components that we should purchase from each
+suppliers become close. To better model the monopolization penalty, one
+should consider the number of suppliers instead of the purchasing number
+variance. That is also a limitation of our model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{k}{using} \PY{n}{PyPlot}
+         \PY{n}{t} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{n+nb}{pi}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)} \PY{c}{\PYZsh{} parameter that traverses the circle }
+         \PY{n}{plot}\PY{p}{(} \PY{l+m+mi}{0} \PY{o}{+} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{cos}\PY{o}{.}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0} \PY{o}{+} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{sin}\PY{o}{.}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} plot circle radius r with center (x1,x2) }
+         
+         \PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{e}\PY{l+s}{q}\PY{l+s}{u}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{c}{\PYZsh{} make x and y scales equal}
+         
+         \PY{n}{npts} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{xfine} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{l}\PY{p}{,}\PY{n}{r}\PY{p}{,}\PY{n}{npts}\PY{p}{)}
+         \PY{n}{yfine} \PY{o}{=} \PY{n}{xfine}\PY{o}{*}\PY{l+m+mi}{0} \PY{o}{+}\PY{n}{l}
+         \PY{n}{plot}\PY{p}{(} \PY{n}{xfine}\PY{p}{,} \PY{n}{yfine}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{g}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{xfine} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{r}\PY{p}{,}\PY{n}{l}\PY{p}{,}\PY{n}{npts}\PY{p}{)}
+         \PY{n}{yfine} \PY{o}{=} \PY{n}{xfine}\PY{o}{*}\PY{l+m+mi}{0} \PY{o}{\PYZhy{}}\PY{n}{l}
+         \PY{n}{plot}\PY{p}{(} \PY{n}{xfine}\PY{p}{,} \PY{n}{yfine}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{g}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{yfine} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{r}\PY{p}{,}\PY{n}{l}\PY{p}{,}\PY{n}{npts}\PY{p}{)}
+         \PY{n}{xfine} \PY{o}{=} \PY{n}{yfine}\PY{o}{*}\PY{l+m+mi}{0} \PY{o}{+}\PY{n}{l}
+         \PY{n}{plot}\PY{p}{(} \PY{n}{xfine}\PY{p}{,} \PY{n}{yfine}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{g}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{yfine} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{l}\PY{p}{,}\PY{n}{r}\PY{p}{,}\PY{n}{npts}\PY{p}{)}
+         \PY{n}{xfine} \PY{o}{=} \PY{n}{yfine}\PY{o}{*}\PY{l+m+mi}{0} \PY{o}{\PYZhy{}}\PY{n}{l}
+         \PY{n}{plot}\PY{p}{(} \PY{n}{xfine}\PY{p}{,} \PY{n}{yfine}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{g}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x2}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y2}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x3}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y3}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x4}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y4}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x5}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y5}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} PyObject <matplotlib.collections.PathCollection object at 0x13bde1dd0>
+\end{Verbatim}
+            
+    The round circle is the target area to build up the assembly plant. The
+square in the circle is the area with allowance while the other four
+parts have penalty on the assembly cost. Five different points are
+generated to show the optimal spot to build the plant in each part. By
+comparison shown above, the red point is the optimal point to build the
+plant which is in the allowance area. Again, the minimum cost and
+optimal point coordinates are:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{println}\PY{p}{(}\PY{n}{getobjectivevalue}\PY{p}{(}\PY{n}{m1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6.789345176322418e6
+-20.0
+16.14609571788413
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{k}{using} \PY{n}{PyPlot}
+         \PY{n}{x\PYZus{}pos} \PY{o}{=}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{180}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{400}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{,}\PY{l+m+mi}{230}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{280}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{]}
+         \PY{n}{y\PYZus{}pos} \PY{o}{=}\PY{p}{[}\PY{l+m+mi}{300}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{260}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{,}\PY{l+m+mi}{430}\PY{p}{,}\PY{l+m+mi}{380}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{200}\PY{p}{]}
+         
+         \PY{n}{scatter}\PY{p}{(} \PY{n}{x\PYZus{}pos}\PY{p}{,} \PY{n}{y\PYZus{}pos}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{c}{\PYZsh{} plot the 50 points }
+         \PY{n}{t} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{n+nb}{pi}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)} \PY{c}{\PYZsh{} parameter that traverses the circle }
+         \PY{n}{plot}\PY{p}{(} \PY{l+m+mi}{0} \PY{o}{+} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{cos}\PY{o}{.}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0} \PY{o}{+} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{sin}\PY{o}{.}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} plot circle radius r with center (x1,x2) }
+         
+         \PY{n}{axis}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{e}\PY{l+s}{q}\PY{l+s}{u}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{c}{\PYZsh{} make x and y scales equal}
+         
+         \PY{n}{npts} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{7}
+             \PY{n}{xfine} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{n}{x\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{getvalue}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{npts}\PY{p}{)}
+             \PY{n}{yfine} \PY{o}{=} \PY{p}{(}\PY{n}{xfine}\PY{o}{\PYZhy{}}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{y\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{x\PYZus{}pos}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(} \PY{n}{xfine}\PY{p}{,} \PY{n}{yfine}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{r}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{end}
+         \PY{n}{xfine} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{l}\PY{p}{,}\PY{n}{r}\PY{p}{,}\PY{n}{npts}\PY{p}{)}
+         \PY{n}{yfine} \PY{o}{=} \PY{n}{xfine}\PY{o}{*}\PY{l+m+mi}{0} \PY{o}{+}\PY{n}{l}
+         \PY{n}{plot}\PY{p}{(} \PY{n}{xfine}\PY{p}{,} \PY{n}{yfine}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{g}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{xfine} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{r}\PY{p}{,}\PY{n}{l}\PY{p}{,}\PY{n}{npts}\PY{p}{)}
+         \PY{n}{yfine} \PY{o}{=} \PY{n}{xfine}\PY{o}{*}\PY{l+m+mi}{0} \PY{o}{\PYZhy{}}\PY{n}{l}
+         \PY{n}{plot}\PY{p}{(} \PY{n}{xfine}\PY{p}{,} \PY{n}{yfine}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{g}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{yfine} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{r}\PY{p}{,}\PY{n}{l}\PY{p}{,}\PY{n}{npts}\PY{p}{)}
+         \PY{n}{xfine} \PY{o}{=} \PY{n}{yfine}\PY{o}{*}\PY{l+m+mi}{0} \PY{o}{+}\PY{n}{l}
+         \PY{n}{plot}\PY{p}{(} \PY{n}{xfine}\PY{p}{,} \PY{n}{yfine}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{g}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{yfine} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{l}\PY{p}{,}\PY{n}{r}\PY{p}{,}\PY{n}{npts}\PY{p}{)}
+         \PY{n}{xfine} \PY{o}{=} \PY{n}{yfine}\PY{o}{*}\PY{l+m+mi}{0} \PY{o}{\PYZhy{}}\PY{n}{l}
+         \PY{n}{plot}\PY{p}{(} \PY{n}{xfine}\PY{p}{,} \PY{n}{yfine}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{g}\PY{l+s}{\PYZhy{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x2}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y2}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x3}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y3}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x4}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y4}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{scatter}\PY{p}{(}\PY{n}{getvalue}\PY{p}{(}\PY{n}{x5}\PY{p}{)}\PY{p}{,}\PY{n}{getvalue}\PY{p}{(}\PY{n}{y5}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} PyObject <matplotlib.collections.PathCollection object at 0x13bf76c10>
+\end{Verbatim}
+            
+    We choose seven different black points representing the location of the
+seven different smartphone accessories. The red lines are the
+transportation routes used to ship each accessory to the overall optimal
+location for assembly. We found that the final location is not stable
+and change with the predetermined location of the seven component area.
+Also, if we scale down the allowance benifit a little bit, we can see
+the optimal plant location could be in the non-allowance area.
+
+Minimum integrated total cost: 2.39e8 + 6.79e6 = 2.4579e8.
+
+    \hypertarget{conclusion}{%
+\subsection{5. Conclusion}\label{conclusion}}
+
+Our project discusses the smartphone components purchasing strategies
+and plant location selection using quadratic programming. Our model
+takes market balance into consideration and values the variance of the
+order numbers from suppliers as a penalty. Furthermore, we consider our
+assembly plant location selection problem with government allowance
+policy intervention. For the purchasing strategies, our results show
+that we should split our budget on all the avaliable suppliers because
+of the relatively high penalty due to the variance of the order numbers
+among the suppliers. The results generally reflects the successful
+strategies that applied in iphone supply chain, which put emphasis on
+diversely finding suppliers and resources to avoid monopolization. The
+assembly plant location we choose in this case is in the allowance area
+since the benefit in that area is huge even if there is more
+transportation cost. However, in the future, if more tradeoffs are
+included and realistic terrain map is used, the problem will be more
+challenging and difficult to solve using area division and
+approximation.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
